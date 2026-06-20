@@ -1,0 +1,25 @@
+{
+  "name": "cited-geo-aeo",
+  "version": "1.0.0",
+  "description": "GEO/AEO optimization toolkit for Cited — pull Google Search Console data, classify answer-engine opportunities, inject JSON-LD schema, and audit pages for AI retrieval readiness.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "gsc:pull": "node scripts/gsc_pull.js",
+    "audit": "node geo_audit.js",
+    "audit:html": "node geo_audit.js index.html"
+  },
+  "keywords": [
+    "geo",
+    "aeo",
+    "generative-engine-optimization",
+    "answer-engine-optimization",
+    "json-ld",
+    "schema",
+    "google-search-console"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}

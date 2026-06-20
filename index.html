@@ -8,6 +8,222 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- ===========================================================================
+     JSON-LD structured data (GEO/AEO)
+     Explicitly defines Cited's brand, service, pricing, and Q&A relationships
+     so answer engines (Perplexity, Google AI Overviews, ChatGPT Search) can
+     parse and cite this page. The FAQ entries below map to the informational
+     queries isolated in aeo_opportunities.json.
+
+     TODO before launch — replace every placeholder marked [TODO]:
+       • Swap https://cited.example for the real production domain.
+       • Fill sameAs[] with verified profile URLs (Google Business Profile,
+         Instagram, LinkedIn, Yelp, etc.).
+       • Add the founder's full name + profile URL and a real logo image URL.
+     =========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://cited.example/#organization",
+      "name": "Cited",
+      "alternateName": "Cited — Answer Engine Optimization",
+      "url": "https://cited.example/",
+      "description": "Cited is the local visibility system built for the AI search era. It makes independent businesses the source AI names when nearby customers ask for a recommendation, then captures those customers as first-party data the owner keeps.",
+      "slogan": "Be the answer AI actually names.",
+      "foundingDate": "2026",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cited.example/logo.png"
+      },
+      "image": "https://cited.example/logo.png",
+      "email": "hello@cited.example",
+      "telephone": "+1-562-555-0100",
+      "priceRange": "Free–$2,500",
+      "areaServed": [
+        { "@type": "City", "name": "Long Beach", "address": { "@type": "PostalAddress", "addressRegion": "CA", "addressCountry": "US" } },
+        { "@type": "Place", "name": "South Bay, California" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Long Beach",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "knowsAbout": [
+        "Answer Engine Optimization",
+        "Generative Engine Optimization",
+        "Local SEO",
+        "Schema markup / structured data",
+        "Google Business Profile optimization",
+        "AI search visibility"
+      ],
+      "founder": {
+        "@type": "Person",
+        "@id": "https://cited.example/#anthony",
+        "name": "Anthony",
+        "jobTitle": "Founder",
+        "worksFor": { "@id": "https://cited.example/#organization" },
+        "knowsAbout": ["Answer Engine Optimization", "Local AI search", "Structured data"]
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "hello@cited.example",
+        "telephone": "+1-562-555-0100",
+        "areaServed": "US-CA",
+        "availableLanguage": "en"
+      },
+      "sameAs": [
+        "https://cited.example/__TODO_google_business_profile__",
+        "https://cited.example/__TODO_instagram__",
+        "https://cited.example/__TODO_linkedin__",
+        "https://cited.example/__TODO_yelp__"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cited.example/#website",
+      "url": "https://cited.example/",
+      "name": "Cited",
+      "publisher": { "@id": "https://cited.example/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://cited.example/#service",
+      "serviceType": "Answer Engine Optimization (AEO) & local AI visibility",
+      "name": "Cited AI Visibility System",
+      "provider": { "@id": "https://cited.example/#organization" },
+      "areaServed": [
+        { "@type": "City", "name": "Long Beach" },
+        { "@type": "Place", "name": "South Bay, California" }
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "name": "Independent local brick-and-mortar businesses"
+      },
+      "description": "A two-part system: (1) get the business cited in AI answers via schema, Google Business Profile, citations, Reddit, and quotable FAQ content; (2) own the resulting customers via a loyalty + SMS first-party data layer.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cited engagements",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "The Audit",
+            "description": "A 12-point AI-visibility audit. Live queries across ChatGPT, Google AI Overviews, and Perplexity; citation-source mapping; Google Business + schema review; Reddit + directory audit; and a 90-day prioritized fix plan. Delivered in 5 business days and yours to keep.",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "category": "Free audit"
+          },
+          {
+            "@type": "Offer",
+            "name": "The Full System",
+            "description": "The audit, executed: schema + structured-data deployment, Google Business Profile rebuild, citation cleanup across 30+ directories, Reddit/forum seeding, quotable FAQ content, plus a loyalty + SMS first-party data layer with QR/NFC enrollment, a missed-call-to-text AI agent, and monthly AI-mention tracking.",
+            "price": "2500",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "category": "Setup + retainer",
+            "priceSpecification": [
+              {
+                "@type": "UnitPriceSpecification",
+                "price": "2500",
+                "priceCurrency": "USD",
+                "name": "One-time setup"
+              },
+              {
+                "@type": "UnitPriceSpecification",
+                "price": "250",
+                "priceCurrency": "USD",
+                "name": "Monthly ongoing",
+                "billingIncrement": 1,
+                "unitCode": "MON"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cited.example/#faq",
+      "isPartOf": { "@id": "https://cited.example/#website" },
+      "about": { "@id": "https://cited.example/#service" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Answer Engine Optimization (AEO)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Answer Engine Optimization (AEO) is the practice of making a business the source that AI answer engines — ChatGPT, Google AI Overviews, and Perplexity — name and cite when people ask a question. Where traditional SEO optimizes for a ranked list of links, AEO optimizes for being the one or two sources quoted directly inside the AI's answer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get my business cited in AI search results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI answer engines pull from structured data, a complete Google Business Profile, consistent directory citations, recent reviews, and third-party mentions on sources like Reddit. To get cited, add LocalBusiness/FAQ schema to your site, fully build out your Google Business Profile, fix name-address-phone inconsistencies across directories, earn recent reviews, and publish FAQ content that answers customer questions in language AI can quote. Cited's free audit shows exactly which of these are missing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my business not showing up in AI Overviews?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually because AI can't find quotable, structured information about you. Common causes are missing schema markup, an incomplete Google Business Profile, inconsistent listings across directories, few recent reviews, and no presence on the forums (like Reddit) that AI cites most. An AI mention audit pinpoints which gap is keeping you out of the answer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between SEO and GEO/AEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional SEO aims to rank your page in a list of blue links a person clicks. GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) aim to make your business the source an AI summarizes and cites inline — often with no click at all. Because roughly 60% of Google searches now end without a click, being cited in the answer matters as much as ranking in the list."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does an AI visibility audit cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cited's 12-point AI visibility audit is free. It is a real document — not a sales call — delivered in 5 business days, and you keep the report whether or not you hire Cited. The optional Full System that executes the audit is a one-time $2,500 setup plus $250 per month, cancellable any time after month three."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the audit take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The free audit is delivered within 5 business days. It starts with a five-minute call to confirm your location, your top three customer queries, and your main competitors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is schema markup and why does AI need it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Schema markup is structured data — like LocalBusiness, FAQ, Product, and Review schema — added to a website's code to describe its content explicitly. AI answer engines rely on it to understand what a business is, what it offers, and how to quote it accurately. Missing schema is invisible schema: without it, AI has to guess, and often guesses wrong or omits you entirely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does Reddit get cited so often in AI answers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reddit is currently the single most-cited source in Google AI Overviews because its threads contain authentic, first-hand recommendations in natural language that answer engines treat as trustworthy. For local businesses, appearing positively in the relevant Reddit and forum threads is one of the strongest signals that you'll be named in an AI answer."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <style>
 :root {
   --paper: #F4F1E8;
