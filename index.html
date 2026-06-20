@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cited — Be the answer AI gives.</title>
+<meta name="description" content="When locals ask AI for the best shop in Long Beach, your business should be the one it names. Cited is the local visibility system built for the AI search era." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #F4F1E8;
+  --paper-2: #EAE4D2;
+  --ink: #1A1814;
+  --ink-soft: #4A463C;
+  --hairline: #C7BFA8;
+  --hl: #F2D544;
+  --green: #1F4A36;
+  --green-soft: #2E6B4E;
+  --red: #B33A2A;
+  --display: 'Space Grotesk', system-ui, sans-serif;
+  --body: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ====== layout ====== */
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.row { display: grid; gap: 48px; }
+@media (min-width: 900px) { .row.cols-2 { grid-template-columns: 1.05fr 1fr; gap: 80px; } }
+
+/* ====== type ====== */
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+h1 { font-size: clamp(40px, 7.5vw, 76px); }
+h2 { font-size: clamp(30px, 4.5vw, 48px); }
+h3 { font-size: clamp(20px, 2.2vw, 26px); letter-spacing: -0.01em; }
+p { color: var(--ink-soft); }
+p.lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink); line-height: 1.5; max-width: 56ch; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--ink-soft);
+}
+
+/* ====== signature: highlighter ====== */
+.hl {
+  background: linear-gradient(180deg, transparent 0%, transparent 58%, var(--hl) 58%, var(--hl) 94%, transparent 94%);
+  padding: 0 0.08em;
+  border-radius: 1px;
+}
+.hl-full {
+  background: var(--hl);
+  padding: 0.05em 0.18em;
+}
+
+/* ====== nav ====== */
+.nav {
+  position: sticky; top: 0; z-index: 30;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0;
+}
+.brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--ink);
+}
+.brand-mark {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 3px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+.nav-links { display: none; gap: 28px; font-size: 14px; font-family: var(--mono); }
+.nav-links a { color: var(--ink); text-decoration: none; }
+.nav-links a:hover { color: var(--green); }
+.nav-cta {
+  font-family: var(--mono); font-size: 13px;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.nav-cta:hover { background: var(--green); }
+@media (min-width: 760px) { .nav-links { display: flex; } }
+
+/* ====== hero ====== */
+.hero { padding: 72px 0 90px; }
+.hero h1 { margin-top: 24px; }
+.hero h1 .hl { white-space: nowrap; }
+.hero-sub { margin-top: 28px; max-width: 52ch; }
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid var(--ink);
+  transition: all .15s ease;
+}
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--green); border-color: var(--green); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--paper); }
+.btn .arrow { font-family: var(--mono); }
+
+/* ====== mock answer card ====== */
+.answer-card {
+  background: #FBFAF4;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  padding: 22px 24px 24px;
+  box-shadow: 0 1px 0 var(--hairline), 0 18px 40px -28px rgba(26,24,20,0.25);
+  font-family: var(--body);
+}
+.answer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 16px;
+}
+.answer-head .tag {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--green);
+}
+.answer-head .dots { font-family: var(--mono); color: var(--hairline); font-size: 12px; }
+.answer-query {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: var(--paper);
+  padding: 10px 12px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+.answer-query::before { content: "❯ "; color: var(--green); }
+.answer-body { font-size: 16px; line-height: 1.55; color: var(--ink); }
+.answer-body p + p { margin-top: 10px; }
+.sources {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-top: 18px; padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+}
+.source-pill {
+  font-family: var(--mono); font-size: 11px;
+  background: var(--paper); border: 1px solid var(--hairline);
+  padding: 5px 10px; border-radius: 99px;
+  color: var(--ink-soft);
+}
+.source-pill.you {
+  background: var(--green); color: var(--paper); border-color: var(--green);
+  font-weight: 500;
+}
+.source-pill.you::before { content: "★ "; }
+
+.answer-caption {
+  margin-top: 14px; font-family: var(--mono); font-size: 12px;
+  color: var(--ink-soft); text-align: right;
+}
+
+/* ====== section frame ====== */
+section.s { padding: 80px 0; border-top: 1px solid var(--hairline); }
+section.s.dark { background: var(--ink); color: var(--paper); border-top: 0; }
+section.s.dark p { color: #C7BFA8; }
+section.s.dark .eyebrow { color: #9A9483; }
+section.s.dark .eyebrow::before { background: #9A9483; }
+section.s.dark h2, section.s.dark h3 { color: var(--paper); }
+
+/* ====== "what changed" ====== */
+.changed-grid { display: grid; gap: 40px; margin-top: 56px; }
+@media (min-width: 760px) { .changed-grid { grid-template-columns: repeat(3, 1fr); gap: 48px; } }
+.stat {
+  border-top: 2px solid var(--ink);
+  padding-top: 18px;
+}
+.stat .num {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(40px, 5.5vw, 56px);
+  letter-spacing: -0.03em; line-height: 1;
+}
+.stat .lbl {
+  margin-top: 12px;
+  font-size: 14px; color: var(--ink-soft); max-width: 32ch;
+}
+
+/* ====== audit checklist ====== */
+.checklist { margin-top: 56px; display: grid; gap: 0; border-top: 1px solid var(--hairline); }
+.check-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--hairline);
+  align-items: start;
+}
+@media (min-width: 760px) {
+  .check-row { grid-template-columns: 80px 1.4fr 1fr; gap: 32px; align-items: center; }
+}
+.check-num {
+  font-family: var(--mono); font-size: 13px;
+  color: var(--green);
+}
+.check-title { font-family: var(--display); font-weight: 500; font-size: 19px; letter-spacing: -0.01em; }
+.check-desc { font-size: 15px; color: var(--ink-soft); }
+
+/* ====== bundle: two halves ====== */
+.halves { display: grid; gap: 40px; margin-top: 56px; }
+@media (min-width: 900px) { .halves { grid-template-columns: 1fr 1fr; gap: 32px; } }
+.half {
+  border: 1px solid var(--hairline);
+  background: #FBFAF4;
+  padding: 32px;
+  border-radius: 4px;
+  position: relative;
+}
+.half-num {
+  position: absolute;
+  top: 24px; right: 28px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--ink-soft); letter-spacing: 0.1em;
+}
+.half h3 { margin-bottom: 14px; }
+.half p { font-size: 15.5px; }
+.half ul { margin-top: 20px; list-style: none; }
+.half li {
+  font-size: 14.5px; color: var(--ink);
+  padding: 10px 0 10px 24px;
+  position: relative;
+  border-top: 1px dashed var(--hairline);
+}
+.half li:first-child { border-top: 0; }
+.half li::before {
+  content: "→";
+  font-family: var(--mono);
+  color: var(--green);
+  position: absolute;
+  left: 0; top: 10px;
+}
+
+/* ====== verticals ====== */
+.verticals { margin-top: 48px; display: grid; gap: 14px; }
+@media (min-width: 600px) { .verticals { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .verticals { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+.vert {
+  border: 1px solid var(--hairline);
+  padding: 18px 20px;
+  border-radius: 2px;
+  background: #FBFAF4;
+  font-family: var(--mono); font-size: 13.5px;
+  display: flex; align-items: center; gap: 12px;
+}
+.vert .tick { color: var(--green); }
+
+/* ====== pricing ====== */
+.pricing { margin-top: 56px; display: grid; gap: 20px; }
+@media (min-width: 760px) { .pricing { grid-template-columns: 1fr 1.2fr; gap: 24px; } }
+.price-card {
+  border: 1px solid var(--paper-2);
+  background: rgba(255,255,255,0.04);
+  padding: 36px 32px;
+  border-radius: 4px;
+}
+.price-card.featured {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+  position: relative;
+}
+.price-card.featured p { color: var(--ink-soft); }
+.price-card.featured .price-tag { color: var(--green); }
+.price-card .ptype {
+  font-family: var(--mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #9A9483;
+}
+.price-card.featured .ptype { color: var(--ink-soft); }
+.price-card h3 { margin-top: 12px; }
+.price-card .price-tag {
+  font-family: var(--display); font-weight: 700;
+  font-size: 40px; letter-spacing: -0.02em;
+  margin-top: 20px; line-height: 1;
+}
+.price-card .price-tag small {
+  font-family: var(--mono); font-weight: 400; font-size: 13px;
+  color: #9A9483; letter-spacing: 0;
+  display: block; margin-top: 8px;
+}
+.price-card.featured .price-tag small { color: var(--ink-soft); }
+.price-card ul { list-style: none; margin-top: 22px; }
+.price-card li {
+  padding: 9px 0 9px 22px; position: relative;
+  font-size: 14.5px;
+  border-top: 1px solid rgba(199,191,168,0.18);
+}
+.price-card.featured li { border-top-color: var(--hairline); }
+.price-card li:first-child { border-top: 0; }
+.price-card li::before {
+  content: "+"; position: absolute; left: 0; top: 9px;
+  font-family: var(--mono); color: var(--hl);
+}
+.price-card.featured li::before { color: var(--green); }
+.price-card .btn {
+  margin-top: 24px;
+  border-color: var(--paper);
+  color: var(--paper);
+}
+.price-card .btn:hover { background: var(--paper); color: var(--ink); }
+.price-card.featured .btn {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+.price-card.featured .btn:hover { background: var(--green); border-color: var(--green); }
+
+.featured-flag {
+  position: absolute; top: -12px; left: 24px;
+  background: var(--hl); color: var(--ink);
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.1em; padding: 5px 10px; border-radius: 2px;
+}
+
+/* ====== final CTA ====== */
+.final {
+  margin-top: 80px;
+  padding: 64px 40px;
+  text-align: center;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+.final h2 { max-width: 18ch; margin: 0 auto 24px; }
+.final .btn { margin-top: 12px; }
+
+/* ====== footer ====== */
+footer {
+  padding: 40px 0 64px;
+  font-family: var(--mono); font-size: 12px;
+  color: var(--ink-soft);
+}
+.foot-row { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+.foot-row a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dashed var(--hairline); padding-bottom: 1px; }
+.foot-row a:hover { color: var(--ink); }
+
+/* ====== misc ====== */
+.pullquote {
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(24px, 3.6vw, 38px);
+  letter-spacing: -0.02em; line-height: 1.2;
+  border-left: 4px solid var(--hl);
+  padding: 6px 0 6px 24px;
+  margin: 56px 0 0;
+  max-width: 32ch;
+}
+.pullquote cite {
+  display: block;
+  font-family: var(--mono); font-style: normal; font-weight: 400;
+  font-size: 13px; color: var(--ink-soft); margin-top: 18px;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .answer-card { transition: transform .4s ease; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand">Cited <span class="brand-mark">[1]</span></a>
+    <div class="nav-links">
+      <a href="#problem">The shift</a>
+      <a href="#audit">Audit</a>
+      <a href="#bundle">System</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#book" class="nav-cta">Book audit →</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="wrap row cols-2">
+    <div>
+      <span class="eyebrow">Cited · Long Beach, CA</span>
+      <h1>Be the answer<br>AI <span class="hl">actually names.</span></h1>
+      <p class="lead hero-sub">
+        Google used to send you customers. Now its AI answers their question and keeps them on the page. When a local asks <em>"best yoga studio in Long Beach"</em> or <em>"smoke shop near me with rewards,"</em> one or two businesses get named. Cited makes sure yours is one of them — and that the customers it sends are yours to keep.
+      </p>
+      <div class="hero-ctas">
+        <a href="#book" class="btn btn-primary">Book a free visibility audit <span class="arrow">→</span></a>
+        <a href="#audit" class="btn btn-ghost">See what we check</a>
+      </div>
+    </div>
+
+    <!-- mock answer card -->
+    <aside aria-label="example AI answer">
+      <div class="answer-card">
+        <div class="answer-head">
+          <span class="tag">AI answer · live example</span>
+          <span class="dots">···</span>
+        </div>
+        <div class="answer-query">best yoga studio in long beach for beginners</div>
+        <div class="answer-body">
+          <p>For warm, beginner-friendly classes, <span class="hl-full">Bloom Studio</span> in Bixby Knolls comes up most often as the recommended pick. They're known for slow-flow vinyasa and small class sizes — most reviewers mention the staff remembers names by the second visit.</p>
+          <p>For something more athletic, locals also cite Sea + Stone in Belmont Shore.</p>
+        </div>
+        <div class="sources">
+          <span class="source-pill you">Bloom Studio</span>
+          <span class="source-pill">Reddit · r/longbeach</span>
+          <span class="source-pill">Yelp</span>
+          <span class="source-pill">Google Business</span>
+        </div>
+      </div>
+      <p class="answer-caption">When AI gives the answer, only the cited shops win.</p>
+    </aside>
+  </div>
+</header>
+
+<!-- ===== PROBLEM ===== -->
+<section class="s" id="problem">
+  <div class="wrap">
+    <span class="eyebrow">What changed</span>
+    <h2 style="margin-top: 18px; max-width: 18ch;">The search engine became the destination.</h2>
+    <p class="lead" style="margin-top: 24px;">
+      For twenty years, Google's job was to point people at your website. That deal is over. AI Overviews, ChatGPT, and Perplexity now read every site, summarize the answer, and serve it inline — no click required. The traffic still happens. The visit doesn't.
+    </p>
+
+    <div class="changed-grid">
+      <div class="stat">
+        <div class="num">~60%</div>
+        <div class="lbl">of Google searches now end without a single click to any website.</div>
+      </div>
+      <div class="stat">
+        <div class="num">1–3</div>
+        <div class="lbl">sources, on average, are cited in an AI answer. Everyone else is invisible.</div>
+      </div>
+      <div class="stat">
+        <div class="num">Reddit</div>
+        <div class="lbl">is now the single most-cited source in AI Overviews. Local business listings are next.</div>
+      </div>
+    </div>
+
+    <blockquote class="pullquote">
+      Ranking on page one used to mean traffic. Now it just means you helped train the answer that replaced you.
+      <cite>— the new local-search reality</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ===== AUDIT ===== -->
+<section class="s" id="audit">
+  <div class="wrap">
+    <span class="eyebrow">The audit · 12 checks · free</span>
+    <h2 style="margin-top: 18px; max-width: 22ch;">We pull up what AI says about your business right now. Then we fix what's making it wrong — or absent.</h2>
+    <p class="lead" style="margin-top: 24px;">
+      The audit is a real document, not a sales call disguised as one. We run live queries against ChatGPT, Google AI Overviews, and Perplexity using the exact phrases your customers type. We pull your citations, your competitors' citations, and the gap. You keep the report whether you hire us or not.
+    </p>
+
+    <div class="checklist">
+      <div class="check-row">
+        <div class="check-num">01</div>
+        <div class="check-title">AI mention audit across 3 engines</div>
+        <div class="check-desc">Live queries on ChatGPT, Google AI Overviews, and Perplexity for the 10 phrases your customers actually use.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">02</div>
+        <div class="check-title">Citation-source mapping</div>
+        <div class="check-desc">Where the AI is pulling its answer from — and which of those sources mention you, your competitors, or neither.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">03</div>
+        <div class="check-title">Google Business Profile completeness</div>
+        <div class="check-desc">Categories, hours, attributes, services, products, posts. The single biggest signal AI uses for local intent.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">04</div>
+        <div class="check-title">Schema markup check</div>
+        <div class="check-desc">LocalBusiness, FAQ, Product, Review schema on your site. Missing schema is invisible schema.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">05</div>
+        <div class="check-title">Reddit + forum presence</div>
+        <div class="check-desc">Whether your business appears in the threads AI cites most. We map mentions, sentiment, and gaps.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">06</div>
+        <div class="check-title">Review velocity + recency</div>
+        <div class="check-desc">AI weighs recent reviews far more than total count. We score your last 90 days against competitors'.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">07</div>
+        <div class="check-title">NAP consistency across 30+ directories</div>
+        <div class="check-desc">Name, address, phone mismatches across Yelp, Apple Maps, Bing, Foursquare, and the niche aggregators AI reads.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">08</div>
+        <div class="check-title">Question-answer coverage</div>
+        <div class="check-desc">The questions customers ask AI about your category, and whether your site answers any of them in language AI can quote.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">09</div>
+        <div class="check-title">Image + product structured data</div>
+        <div class="check-desc">Alt text, image schema, and product feeds — what AI uses to decide if you have what someone wants.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">10</div>
+        <div class="check-title">Competitor citation teardown</div>
+        <div class="check-desc">The 2–3 competitors AI keeps naming. Why. What they did that you didn't.</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">11</div>
+        <div class="check-title">First-party data exposure score</div>
+        <div class="check-desc">How dependent you are on platform traffic. If Google flipped a switch tomorrow, how many customers could you still reach directly?</div>
+      </div>
+      <div class="check-row">
+        <div class="check-num">12</div>
+        <div class="check-title">90-day fix plan, prioritized</div>
+        <div class="check-desc">Everything sorted by impact-to-effort. You can run it yourself, hand it to your team, or hand it to us.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUNDLE ===== -->
+<section class="s" id="bundle">
+  <div class="wrap">
+    <span class="eyebrow">The full system</span>
+    <h2 style="margin-top: 18px; max-width: 22ch;">Get cited. Then make sure those customers are yours, not Google's.</h2>
+    <p class="lead" style="margin-top: 24px;">
+      Showing up in AI answers is half of it. The other half is what happens after the click. If a new customer walks through your door and you never get their phone number, you just rented attention from the same platform that's deciding whether to send you any more.
+    </p>
+
+    <div class="halves">
+      <div class="half">
+        <span class="half-num">01 / Visibility</span>
+        <h3>The AEO engagement</h3>
+        <p>The audit becomes a roadmap. We execute it. Schema, GBP, citations, content, Reddit. You stop guessing why customers can't find you.</p>
+        <ul>
+          <li>Schema + structured data deployment</li>
+          <li>Google Business Profile rebuild</li>
+          <li>Reddit + niche forum presence</li>
+          <li>FAQ + question-answer content AI can quote</li>
+          <li>Citation cleanup across 30+ directories</li>
+          <li>Monthly AI-mention tracking report</li>
+        </ul>
+      </div>
+      <div class="half">
+        <span class="half-num">02 / Ownership</span>
+        <h3>The first-party data layer</h3>
+        <p>A loyalty + SMS system that turns every walk-in and every cited click into a phone number you own. When the algorithm shifts again — and it will — you have a list to text.</p>
+        <ul>
+          <li>QR + NFC loyalty enrollment at checkout</li>
+          <li>SMS list with TCPA-compliant opt-in</li>
+          <li>Missed-call-to-text AI agent</li>
+          <li>Birthday, restock, and re-engagement flows</li>
+          <li>Owner dashboard with real visit data</li>
+          <li>Export-anywhere customer database (yours, not ours)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO ===== -->
+<section class="s" id="who">
+  <div class="wrap">
+    <span class="eyebrow">Built for</span>
+    <h2 style="margin-top: 18px; max-width: 20ch;">Independent shops the AI is starting to ignore.</h2>
+    <p class="lead" style="margin-top: 24px;">
+      Cited is local on purpose. We work with brick-and-mortar businesses in Long Beach and the South Bay where one walk-in is worth more than a thousand impressions. If your customers ask AI for a recommendation and you're not the recommendation, this is the fix.
+    </p>
+
+    <div class="verticals">
+      <div class="vert"><span class="tick">▸</span> Yoga · Pilates · CrossFit studios</div>
+      <div class="vert"><span class="tick">▸</span> Cannabis dispensaries</div>
+      <div class="vert"><span class="tick">▸</span> Smoke + vape shops</div>
+      <div class="vert"><span class="tick">▸</span> Adult boutiques</div>
+      <div class="vert"><span class="tick">▸</span> Independent coffee + cafés</div>
+      <div class="vert"><span class="tick">▸</span> Salons + barbershops</div>
+      <div class="vert"><span class="tick">▸</span> Med spas + wellness clinics</div>
+      <div class="vert"><span class="tick">▸</span> Trade services (HVAC, locksmith, mobile detail)</div>
+      <div class="vert"><span class="tick">▸</span> Any local shop with regulars</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="s dark" id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Pricing · plain</span>
+    <h2 style="margin-top: 18px; max-width: 22ch; color: var(--paper);">Start with the free audit. Hire us if it's worth it.</h2>
+    <p class="lead" style="margin-top: 24px; color: #C7BFA8; max-width: 56ch;">
+      No retainers we can't justify. No long contracts. One free audit, one transparent build, one optional monthly. Cancel anytime after month three.
+    </p>
+
+    <div class="pricing">
+      <div class="price-card">
+        <span class="ptype">Step one</span>
+        <h3 style="color: var(--paper);">The Audit</h3>
+        <div class="price-tag" style="color: var(--hl);">Free<small>12-point report · delivered in 5 business days</small></div>
+        <ul>
+          <li>Live AI-mention scan across 3 engines</li>
+          <li>Competitor citation teardown</li>
+          <li>Google Business + schema review</li>
+          <li>Reddit + directory audit</li>
+          <li>90-day prioritized fix plan</li>
+          <li>Yours to keep — no obligation</li>
+        </ul>
+        <a href="#book" class="btn">Book the audit →</a>
+      </div>
+
+      <div class="price-card featured">
+        <span class="featured-flag">Most shops start here</span>
+        <span class="ptype">Step two — optional</span>
+        <h3>The Full System</h3>
+        <div class="price-tag">$2,500<small>one-time setup · then $250/mo ongoing</small></div>
+        <ul>
+          <li>Everything in the audit, executed</li>
+          <li>Schema, GBP, and citation buildout</li>
+          <li>Reddit + forum seeding</li>
+          <li>Loyalty + SMS list with QR / NFC enrollment</li>
+          <li>Missed-call-to-text AI agent</li>
+          <li>Monthly mention-tracking + report</li>
+          <li>You own the customer list — exportable any time</li>
+        </ul>
+        <a href="#book" class="btn">Talk it through →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="s" id="book">
+  <div class="wrap">
+    <div class="final">
+      <span class="eyebrow">Book the audit</span>
+      <h2 style="margin-top: 18px;">Find out what AI says about your shop. <span class="hl">Today.</span></h2>
+      <p class="lead" style="margin: 0 auto; max-width: 48ch;">
+        Five-minute call. We confirm your location, your top three queries, and your competitors. Five business days later you get the full report. Costs nothing.
+      </p>
+      <a href="mailto:hello@cited.example?subject=Free%20visibility%20audit" class="btn btn-primary" style="margin-top: 32px;">Email Anthony → hello@cited.example</a>
+      <p style="margin-top: 18px; font-family: var(--mono); font-size: 13px; color: var(--ink-soft);">
+        Or text <strong style="color: var(--ink);">(562) 555-0100</strong> · Long Beach + South Bay
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot-row">
+    <div>Cited <span class="brand-mark" style="background: var(--ink-soft); color: var(--paper);">[1]</span> · Long Beach, CA · est. 2026</div>
+    <div>Built for shops the algorithm forgot.</div>
+    <div><a href="#book">Book the audit →</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
