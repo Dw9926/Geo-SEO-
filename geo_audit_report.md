@@ -1,6 +1,6 @@
 # GEO / AEO Audit Report
 
-_Generated 2026-06-20T22:21:15.256Z · 1 file(s) scanned_
+_Generated 2026-06-20T23:56:34.489Z · 1 file(s) scanned_
 
 Scores rate how readily an answer engine (Perplexity, Google AI Overviews, ChatGPT Search) can **retrieve and quote** each page. Lower = higher priority for a rewrite.
 
@@ -8,25 +8,25 @@ Scores rate how readily an answer engine (Perplexity, Google AI Overviews, ChatG
 
 | Page | Overall | Direct Answer | Data Density | Info Architecture | Query Coverage |
 | --- | --- | --- | --- | --- | --- |
-| `index.html` | 🟢 Strong (92) | 100 | 91 | 75 | 100 |
+| `index.html` | 🟢 Strong (91) | 100 | 88 | 74 | 100 |
 
 ---
 
-## `index.html` — 🟢 Strong (92/100)
+## `index.html` — 🟢 Strong (91/100)
 
 **Title:** Cited — Be the answer AI gives.  
-**Headings:** 1× H1 · 7× H2 · 6× H3
+**Headings:** 1× H1 · 8× H2 · 6× H3
 
 ```
 Direct Answer Readiness   ██████████ 100
-Data Density              █████████░ 91
-Information Architecture  ████████░░ 75
+Data Density              █████████░ 88
+Information Architecture  ███████░░░ 74
 Query Coverage (Step 1)   ██████████ 100
 ```
 
 **Flags to fix:**
 
-- **Data Density:** Vague/unsupported language (many, most, very) — replace with specifics or cite a figure.
+- **Data Density:** Vague/unsupported language (many, most, very, really) — replace with specifics or cite a figure.
 
 <details><summary>Opening the AI would try to quote</summary>
 
