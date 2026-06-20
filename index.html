@@ -595,6 +595,44 @@ footer {
 .foot-row a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dashed var(--hairline); padding-bottom: 1px; }
 .foot-row a:hover { color: var(--ink); }
 
+/* ====== compare: SEO vs GEO ====== */
+.compare-wrap { margin-top: 48px; overflow-x: auto; }
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  min-width: 560px;
+}
+.compare th, .compare td {
+  text-align: left;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--hairline);
+  vertical-align: top;
+}
+.compare thead th {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--ink);
+}
+.compare thead th:last-child { color: var(--green); }
+.compare tbody th {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink);
+  width: 26%;
+}
+.compare td { color: var(--ink-soft); }
+.compare td:last-child { color: var(--ink); }
+.compare tr:last-child th, .compare tr:last-child td { border-bottom: 0; }
+.qa-grid { margin-top: 48px; display: grid; gap: 28px; }
+@media (min-width: 760px) { .qa-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
+.qa h3 { font-size: 19px; margin-bottom: 8px; }
+.qa p { font-size: 15.5px; }
+
 /* ====== misc ====== */
 .pullquote {
   font-family: var(--display); font-weight: 500;
@@ -625,6 +663,7 @@ footer {
     <a href="#" class="brand">Cited <span class="brand-mark">[1]</span></a>
     <div class="nav-links">
       <a href="#problem">The shift</a>
+      <a href="#seo-vs-geo">SEO vs GEO</a>
       <a href="#audit">Audit</a>
       <a href="#bundle">System</a>
       <a href="#pricing">Pricing</a>
@@ -700,6 +739,72 @@ footer {
       Ranking on page one used to mean traffic. Now it just means you helped train the answer that replaced you.
       <cite>— the new local-search reality</cite>
     </blockquote>
+  </div>
+</section>
+
+<!-- ===== SEO vs GEO ===== -->
+<section class="s" id="seo-vs-geo">
+  <div class="wrap">
+    <span class="eyebrow">SEO vs GEO</span>
+    <h2 style="margin-top: 18px; max-width: 22ch;">What is the difference between SEO and GEO?</h2>
+    <p class="lead" style="margin-top: 24px;">
+      Traditional SEO optimizes to <strong>rank your page</strong> in a list of blue links a person clicks. GEO — Generative Engine Optimization, and its cousin AEO (Answer Engine Optimization) — optimizes to make your business the <strong>source the AI summarizes and cites</strong> inside the answer itself, often with no click at all. With roughly 60% of Google searches now ending without a click, being named in the answer matters as much as ranking in the list.
+    </p>
+
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Traditional SEO</th>
+            <th scope="col">GEO / AEO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Goal</th>
+            <td>Rank high in a list of links</td>
+            <td>Be the source named &amp; cited in the AI answer</td>
+          </tr>
+          <tr>
+            <th scope="row">Where you win</th>
+            <td>Page-one results</td>
+            <td>ChatGPT, Google AI Overviews, Perplexity</td>
+          </tr>
+          <tr>
+            <th scope="row">Success metric</th>
+            <td>Clicks &amp; organic traffic</td>
+            <td>Citations &amp; mentions in generated answers</td>
+          </tr>
+          <tr>
+            <th scope="row">Primary signals</th>
+            <td>Backlinks, keywords, page speed</td>
+            <td>Schema, complete Google Business Profile, recent reviews, Reddit &amp; forum mentions</td>
+          </tr>
+          <tr>
+            <th scope="row">Content style</th>
+            <td>Keyword-targeted pages</td>
+            <td>Direct, quotable answers to real questions</td>
+          </tr>
+          <tr>
+            <th scope="row">Result of winning</th>
+            <td>A visitor to your site</td>
+            <td>A recommendation made on your behalf</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="qa-grid">
+      <div class="qa">
+        <h3>Is GEO replacing SEO?</h3>
+        <p>No — it's layered on top. The same fundamentals (a fast, crawlable site, accurate listings, real reviews) still matter. GEO adds the structured data and quotable content that let an answer engine repeat your business confidently instead of guessing or skipping you.</p>
+      </div>
+      <div class="qa">
+        <h3>Why does my SEO ranking not get me cited?</h3>
+        <p>Ranking proves a page is relevant; it doesn't hand the AI a clean, structured fact to quote. Without schema markup, a complete Google Business Profile, and direct question-answer content, the engine has nothing easy to lift — so it cites a competitor or a Reddit thread instead.</p>
+      </div>
+    </div>
   </div>
 </section>
 
