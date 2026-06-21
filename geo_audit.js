@@ -26,7 +26,11 @@ import { classifyQuery } from "./scripts/lib/classify.js";
 
 const ROOT = process.cwd();
 const REPORT_PATH = resolve(ROOT, "geo_audit_report.md");
-const IGNORE_DIRS = new Set(["node_modules", ".git", "dist", "build", ".next"]);
+const IGNORE_DIRS = new Set(["node_modules", ".git", "dist", "build", ".next", "docs"]);
+// Generated output and project meta — not content pages. Skipped during a full
+// scan (auditing the report against itself is meaningless), but still auditable
+// if passed explicitly as an argument.
+const IGNORE_FILES = new Set(["geo_audit_report.md", "README.md", "CHANGELOG.md", "LICENSE.md"]);
 const VAGUE_TERMS = [
   "many", "most", "lots", "tons", "several", "various", "numerous",
   "very", "really", "incredibly", "leading", "world-class", "best-in-class",
@@ -41,7 +45,10 @@ function walk(dir, acc = []) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) walk(full, acc);
-    else if ([".html", ".htm", ".md", ".markdown"].includes(extname(entry).toLowerCase())) {
+    else if (
+      !IGNORE_FILES.has(entry) &&
+      [".html", ".htm", ".md", ".markdown"].includes(extname(entry).toLowerCase())
+    ) {
       acc.push(full);
     }
   }
