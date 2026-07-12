@@ -1,0 +1,259 @@
+  <div className="max-w-md mx-auto px-5 pb-24">
+
+    {/* masthead */}
+    <header className="pt-6 pb-4 flex items-end justify-between" style={{ borderBottom: `1px solid ${INK}` }}>
+      <div>
+        <div style={{ fontFamily: DIDOT, fontSize: 30, letterSpacing: "0.32em", lineHeight: 1 }}>MAISON</div>
+        <div className="mt-1" style={{ fontSize: 10, letterSpacing: "0.2em", color: MUTE }}>
+          THE IDLE HOUSE OF DESIGN
+        </div>
+      </div>
+      <div className="text-right" style={{ fontSize: 10, letterSpacing: "0.15em" }}>
+        <div style={{ color: KLEIN, fontWeight: 600 }}>{seasonName(game.season)}</div>
+        <div style={{ color: MUTE }}>RENOWN {game.renown} · DAY {game.streak}</div>
+      </div>
+    </header>
+
+    {/* taste counter */}
+    <section className="text-center pt-8 pb-5">
+      <div style={{ fontSize: 10, letterSpacing: "0.3em", color: MUTE }}>TASTE</div>
+      <div style={{ fontFamily: DIDOT, fontSize: 56, lineHeight: 1.05 }}>{fmt(game.taste)}</div>
+      <div className="mt-1" style={{ fontSize: 12, color: MUTE }}>
+        {fmt(perSec)} / sec · house multiplier ×{globalMult.toFixed(2)}
+      </div>
+      <button
+        onClick={sketch}
+        className="mt-4 px-8 py-3 active:scale-95 transition-transform"
+        style={{ background: INK, color: PAPER, fontSize: 12, letterSpacing: "0.25em" }}
+      >
+        SKETCH +{fmt(tapPower)}
+      </button>
+    </section>
+
+    {/* milestone bar */}
+    {nextMilestone && (
+      <section className="mb-6">
+        <div className="flex justify-between mb-1" style={{ fontSize: 10, letterSpacing: "0.12em", color: MUTE }}>
+          <span>NEXT PRESS FEATURE</span>
+          <span>{Math.floor(mProgress * 100)}% to {fmt(nextMilestone)}</span>
+        </div>
+        <div style={{ height: 3, background: LINE }}>
+          <div style={{ height: 3, width: `${mProgress * 100}%`, background: KLEIN, transition: "width .3s" }} />
+        </div>
+      </section>
+    )}
+
+    {/* wing tabs */}
+    <nav className="flex" style={{ borderTop: `1px solid ${INK}`, borderBottom: `1px solid ${LINE}` }}>
+      {WINGS.map((w) => {
+        const locked = game.lifetime < w.unlock;
+        const active = wing === w.id;
+        return (
+          <button
+            key={w.id}
+            onClick={() => !locked && setWing(w.id)}
+            className="flex-1 py-3"
+            style={{
+              fontSize: 11, letterSpacing: "0.15em",
+              color: locked ? "#C4C2BA" : active ? PAPER : INK,
+              background: active ? INK : "transparent",
+            }}
+          >
+            {w.name.toUpperCase()}
+            {locked && <div style={{ fontSize: 9, color: "#C4C2BA" }}>{fmt(w.unlock)} lifetime</div>}
+          </button>
+        );
+      })}
+    </nav>
+
+    {/* studios */}
+    <section className="mt-5">
+      <div style={{ fontSize: 10, letterSpacing: "0.25em", color: MUTE }}>STUDIOS</div>
+      {activeWing.studios.map((st) => {
+        const owned = game.studios[st.id] || 0;
+        const cost = studioCost(st);
+        const can = game.taste >= cost;
+        return (
+          <div key={st.id} className="flex items-center justify-between py-3" style={{ borderBottom: `1px solid ${LINE}` }}>
+            <div>
+              <div style={{ fontFamily: DIDOT, fontSize: 17 }}>{st.name}</div>
+              <div style={{ fontSize: 11, color: MUTE }}>
+                {owned > 0 ? `${owned} · ${fmt(st.inc * owned * globalMult)}/sec` : `${fmt(st.inc)}/sec each`}
+              </div>
+            </div>
+            <button
+              onClick={() => buyStudio(st)}
+              disabled={!can}
+              className="px-4 py-2 active:scale-95 transition-transform"
+              style={{
+                fontSize: 11, letterSpacing: "0.1em",
+                border: `1px solid ${can ? INK : LINE}`,
+                color: can ? INK : "#C4C2BA",
+                background: "transparent",
+              }}
+            >
+              {fmt(cost)}
+            </button>
+          </div>
+        );
+      })}
+    </section>
+
+    {/* drop */}
+    <section className="mt-7 p-4" style={{ border: `1px solid ${INK}` }}>
+      <div className="flex items-center justify-between">
+        <div>
+          <div style={{ fontFamily: DIDOT, fontSize: 19 }}>Commission a Drop</div>
+          <div style={{ fontSize: 10, color: MUTE, letterSpacing: "0.05em" }}>
+            One unseen {activeWing.name.toLowerCase()} piece · 55% House · 30% Refined · 12% Signature · 3% Iconic
+          </div>
+        </div>
+        <button
+          onClick={commissionDrop}
+          disabled={game.taste < dropCost}
+          className="px-5 py-3 active:scale-95 transition-transform"
+          style={{
+            background: game.taste >= dropCost ? KLEIN : LINE,
+            color: game.taste >= dropCost ? "#fff" : "#A5A39B",
+            fontSize: 12, letterSpacing: "0.15em",
+          }}
+        >
+          {fmt(dropCost)}
+        </button>
+      </div>
+    </section>
+
+    {/* lookbook / collections */}
+    <section className="mt-7">
+      <div style={{ fontSize: 10, letterSpacing: "0.25em", color: MUTE }}>LOOKBOOK — {activeWing.name.toUpperCase()}</div>
+      {activeWing.collections.map((c) => {
+        const done = c.items.every((it) => game.designs[`${activeWing.id}:${it}`]);
+        return (
+          <div key={c.id} className="mt-4">
+            <div className="flex justify-between items-baseline mb-2">
+              <span style={{ fontFamily: DIDOT, fontSize: 15 }}>{c.name}</span>
+              <span style={{ fontSize: 10, letterSpacing: "0.1em", color: done ? KLEIN : MUTE }}>
+                {done ? "COMPLETE · ×1.25" : `${c.items.filter((it) => game.designs[`${activeWing.id}:${it}`]).length}/${c.items.length}`}
+              </span>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {c.items.map((it) => {
+                const key = `${activeWing.id}:${it}`;
+                const r = game.designs[key];
+                return (
+                  <div key={it} className="relative" style={{ aspectRatio: "3/4" }}>
+                    {r ? (
+                      <div className="w-full h-full" style={{ background: swatch(key, r), border: `2px solid ${RARITIES[r].color}` }}>
+                        {r === "iconic" && (
+                          <div className="w-full h-full" style={{
+                            background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%)",
+                            backgroundSize: "200% 100%", animation: "sheen 2.6s linear infinite",
+                          }} />
+                        )}
+                        <div className="absolute bottom-0 left-0 right-0 px-1 py-0.5" style={{ background: "rgba(20,20,18,.72)", color: "#fff", fontSize: 8, lineHeight: 1.2 }}>
+                          {it}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center" style={{ border: `1px dashed ${LINE}`, color: "#CFCDC5", fontSize: 9, textAlign: "center", padding: 4 }}>
+                        {it}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </section>
+
+    {/* prestige */}
+    <section className="mt-8 p-4 text-center" style={{ background: INK, color: PAPER }}>
+      <div style={{ fontFamily: DIDOT, fontSize: 20 }}>Show the Collection</div>
+      <div className="mt-1" style={{ fontSize: 11, color: "#B9B8B2", lineHeight: 1.5 }}>
+        End {seasonName(game.season)}. Studios and taste reset; renown is forever.
+        {renownGain >= 1
+          ? ` Ready: +${renownGain} renown (+${renownGain * 12}% permanent).`
+          : ` Reach ${fmt(1e6 * Math.pow(game.renown + 1, 2))} lifetime taste to gain renown.`}
+      </div>
+      <button
+        onClick={newSeason}
+        disabled={renownGain < 1}
+        className="mt-3 px-6 py-2 active:scale-95 transition-transform"
+        style={{
+          border: `1px solid ${renownGain >= 1 ? PAPER : "#3A3A38"}`,
+          color: renownGain >= 1 ? PAPER : "#5A5A57",
+          background: "transparent",
+          fontSize: 11, letterSpacing: "0.2em",
+        }}
+      >
+        BEGIN {seasonName(game.season + 1)}
+      </button>
+    </section>
+
+    <footer className="mt-6 text-center" style={{ fontSize: 9, letterSpacing: "0.15em", color: "#C4C2BA" }}>
+      LIFETIME {fmt(game.lifetime)} · DROPS {game.drops} · AUTOSAVES EVERY 10s · OFFLINE EARNINGS UP TO {OFFLINE_CAP_H}H
+    </footer>
+  </div>
+
+  {/* toasts */}
+  <div className="fixed bottom-4 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none px-4">
+    {toasts.map((t) => (
+      <div key={t.id} className="px-4 py-2" style={{ background: INK, color: PAPER, fontSize: 11, letterSpacing: "0.05em", animation: "rise .25s ease-out" }}>
+        {t.msg}
+      </div>
+    ))}
+  </div>
+
+  {/* drop reveal */}
+  {reveal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-8" style={{ background: "rgba(20,20,18,.88)" }} onClick={() => setReveal(null)}>
+      <div className="w-full max-w-xs text-center" style={{ animation: "cardIn .5s cubic-bezier(.2,.9,.3,1.2)" }}>
+        <div className="mx-auto relative" style={{ width: 200, height: 266, background: swatch(`${reveal.wing}:${reveal.name}`, reveal.rarity), border: `3px solid ${RARITIES[reveal.rarity].color}` }}>
+          {reveal.rarity === "iconic" && (
+            <div className="absolute inset-0" style={{
+              background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,.6) 50%, transparent 60%)",
+              backgroundSize: "200% 100%", animation: "sheen 2.2s linear infinite",
+            }} />
+          )}
+        </div>
+        <div className="mt-4" style={{ fontSize: 10, letterSpacing: "0.3em", color: RARITIES[reveal.rarity].color, fontWeight: 700 }}>
+          {RARITIES[reveal.rarity].label.toUpperCase()}
+        </div>
+        <div style={{ fontFamily: DIDOT, fontSize: 26, color: PAPER }}>{reveal.name}</div>
+        <div style={{ fontSize: 11, color: "#B9B8B2" }}>
+          {reveal.wing} · +{Math.round(RARITIES[reveal.rarity].bonus * 100)}% house income, permanently
+        </div>
+        <button className="mt-5 px-6 py-2" style={{ border: "1px solid #FAFAF7", color: PAPER, fontSize: 11, letterSpacing: "0.2em", background: "transparent" }}>
+          INTO THE LOOKBOOK
+        </button>
+      </div>
+    </div>
+  )}
+
+  {/* welcome back */}
+  {welcome && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-8" style={{ background: "rgba(20,20,18,.88)" }} onClick={() => setWelcome(null)}>
+      <div className="w-full max-w-xs text-center p-6" style={{ background: PAPER, animation: "cardIn .4s ease-out" }}>
+        <div style={{ fontFamily: DIDOT, fontSize: 24 }}>While you were out</div>
+        {welcome.earned > 1 && (
+          <>
+            <div className="mt-3" style={{ fontFamily: DIDOT, fontSize: 40, color: KLEIN }}>+{fmt(welcome.earned)}</div>
+            <div style={{ fontSize: 11, color: MUTE }}>
+              the studios kept working — {Math.min(welcome.away / 3600, OFFLINE_CAP_H).toFixed(1)}h at half pace
+            </div>
+          </>
+        )}
+        {welcome.streak && (
+          <div className="mt-3" style={{ fontSize: 12, color: INK }}>
+            🔥 {welcome.streak} — income +{Math.min((gameRef.current.streak - 1) * 2, 20)}%
+          </div>
+        )}
+        <button className="mt-5 px-6 py-2" style={{ background: INK, color: PAPER, fontSize: 11, letterSpacing: "0.2em" }}>
+          BACK TO WORK
+        </button>
+      </div>
+    </div>
+  )}
+</div>
