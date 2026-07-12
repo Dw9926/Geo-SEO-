@@ -71,3 +71,18 @@ Each page is scored 0–100 on:
 
 Pages are graded 🟢 Strong / 🟡 Needs work / 🔴 Rewrite and sorted worst-first in
 `geo_audit_report.md`.
+
+## Bonus — MAISON, an idle game
+
+`maison/` is a self-contained idle game (an "idle design house": earn Taste, hire
+studios across Fashion / Automotive / Interiors, commission Drops, complete
+collections, and show the season for permanent renown). It's a static page —
+no server required:
+
+```bash
+cd maison && npx -y serve .    # or open maison/index.html directly
+```
+
+Saves live in the browser's localStorage, autosaving every 10 seconds, with
+offline earnings when you come back. To hack on it, edit `maison/src/app.jsx`
+and rebuild the bundle with `cd maison && npm install && npm run build`.
