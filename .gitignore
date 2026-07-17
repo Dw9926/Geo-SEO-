@@ -3,3 +3,5 @@ node_modules/
 .env.local
 *.key.json
 service-account*.json
+__pycache__/
+*.pyc
